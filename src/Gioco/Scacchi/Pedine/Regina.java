@@ -19,7 +19,7 @@ public class Regina extends PedinaScacchi{
                 da.columnIndex == a.columnIndex && da.rowIndex != a.rowIndex){
             return traiettoria(da, a, s);
         }
-        
+        return false;
     }
 
     @Override
@@ -34,9 +34,9 @@ public class Regina extends PedinaScacchi{
     }
     
     public boolean traiettoriaDiagonale(Casella da, Casella a, Scacchiera s){
-        int si, sj, di, dj; // s = source  d = destination
+           int si, sj, di, dj; // s = source  d = destination
         si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
-        
+
         if(si < di){// la casella di arrivo sta sotto a quella di partenza
             if (sj < dj){ // alla destra di quella di partenza
                 for(int i = 1;i<(dj-sj);i++){
@@ -47,7 +47,8 @@ public class Regina extends PedinaScacchi{
                     }
                 }
             }
-        }else if (si > di)
+        }
+        return false;
     }
     
     

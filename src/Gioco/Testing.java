@@ -14,7 +14,7 @@ public class Testing {
                 CasellaVuotaException, CasellaOccupataException,
                 MossaIllegaleException, PattaException, TurnoErratoException {
             String print;
-             /* COSTRUTTORE FEN PER NUOVA PARTITA
+            /*COSTRUTTORE FEN PER NUOVA PARTITA
             PartitaScacchi p = new PartitaScacchi();
             System.out.println("partita creata");
 
@@ -40,8 +40,14 @@ public class Testing {
             System.out.print(p);
             */
             
-            PartitaScacchi p = new PartitaScacchi("8/8/8/8/8/2k5/8/8");
-            print = p.toString();
+            PartitaScacchi p1 = new PartitaScacchi("8/1b6/8/8/8/8/8/8");
+            Casella da = new Casella(1,1);
+            Casella a = new Casella(7,7);
+            p1.muovi(a, da);
+            System.out.print(p1);
+
+
+            //print = p.toString();
             /*
             CICLO DEI MOVIMENTI DEL RE
             
@@ -89,6 +95,7 @@ public class Testing {
             pita = new PartitaScacchi(["t.ar..ct", "p..p.pCp", "c..A.D..",".p.CP..P","......P.","...P....","P.P.R...","d.....A.","N"] );
             System.out.println("partita creata");
              */
-            
+            System.out.print("\n");
+            System.out.print("G.G");
         }   
 }
