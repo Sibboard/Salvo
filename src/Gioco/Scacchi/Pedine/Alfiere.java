@@ -29,9 +29,4 @@ public class Alfiere extends PedinaScacchi{
                 else return 'b';
     }
     
-    public void dio{
-        }
-}
-    
-    
 }
