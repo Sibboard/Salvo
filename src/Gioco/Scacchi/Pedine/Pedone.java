@@ -2,6 +2,7 @@ package Gioco.Scacchi.Pedine;
 
 import Gioco.*;
 import Gioco.Scacchi.*;
+import Gioco.Giocatore.*;
 
 /**
  *

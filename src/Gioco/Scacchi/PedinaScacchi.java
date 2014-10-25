@@ -14,18 +14,7 @@ public abstract class PedinaScacchi implements Pezzo {
     public PedinaScacchi (Giocatore color){
         this.colore = color;
     }
-    
-    //@Override
-    //public boolean puoiMuovere(Casella da, Casella a, Scacchiera s);
-    
-    /*
-    @Override
-    public Giocatore getColore(){
-        return this.colore;
-    }
-    */
-      
-    
+       
     @Override
     public String toString(){
         try{

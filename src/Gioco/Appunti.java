@@ -21,5 +21,14 @@ public class Appunti {
     -- SET GET SCACCHIOERA???
     
     --set\get primamossa pedone,re,torre
+    
+    -- in muovi alla fine controlla: scacco\ pedone promozione1\....ù
+    
+    
+    -per i pedoni?? 
+    
+    
     */
+    
+    
 }

@@ -2,12 +2,13 @@ package Gioco.Scacchi.Pedine;
 
 import Gioco.*;
 import Gioco.Scacchi.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author sibbor
  */
-public class Regina extends PedinaScacchi{
+public class Regina extends PedinaScacchi implements Traiettoria{
 
     public Regina(Giocatore colore) {
         super(colore);
@@ -15,11 +16,14 @@ public class Regina extends PedinaScacchi{
 
     @Override
     public boolean puoiMuovere(Casella da, Casella a, Scacchiera s) {
-        if(da.rowIndex == a.rowIndex && da.columnIndex != a.columnIndex ||
-                da.columnIndex == a.columnIndex && da.rowIndex != a.rowIndex){
-            return traiettoria(da, a, s);
-        }
-        return false;
+        int si, sj, di, dj; // s = source  d = destination
+        si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
+        
+        if(si == di && sj != dj || sj == dj && si != di){
+            return traiettoriaDritta(da, a, s);
+        }else if (Math.abs(si-di)== Math.abs(sj-dj)){
+            return traiettoriaDiagonale(da,a,s);
+        }else return false;
     }
 
     @Override
@@ -33,51 +37,62 @@ public class Regina extends PedinaScacchi{
                 else return 'q';
     }
     
-    public boolean traiettoriaDiagonale(Casella da, Casella a, Scacchiera s){
-           int si, sj, di, dj; // s = source  d = destination
-        si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
-
-        if(si < di){// la casella di arrivo sta sotto a quella di partenza
-            if (sj < dj){ // alla destra di quella di partenza
-                for(int i = 1;i<(dj-sj);i++){
-                    if(s.getPezzo(si+i, sj+i) != null && si+i == di && sj+i == dj){
-                        return true;
-                    }else if (s.getPezzo(si+i, sj+i) != null) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    
-    
-    public boolean traiettoria(Casella da, Casella a, Scacchiera s){
+    @Override
+    public boolean traiettoriaDritta(Casella da, Casella a, Scacchiera s){
         int si, sj, di, dj; // s = source  d = destination
         si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
-        
-        if(si == di){ //stessa colonna
-            if(sj < dj){  //devo scendere
-                for(int i = sj +1; i < dj; i++){
-                    if (s.getPezzo(di, i) != null) return false;
-                }
-            }else{
-                for(int i = sj -1; i > dj; i--){
-                    if(s.getPezzo(di,i) != null) return false;
-                }
+
+        int srcAsse = (si == di) ? sj : si;
+        int destAsse = (sj == dj) ? di : dj;
+        int destAsseMovimento = (sj == dj) ? dj : di;
+
+        int max = Math.max(srcAsse, destAsse);
+        int min = Math.min(srcAsse, destAsse);
+
+        for(int i = min + 1; i < max; i++){
+            if(srcAsse == si && s.getPezzo(destAsseMovimento, i) != null) {
+               return false;
             }
-        } // fine controllo sulla stessa riga
-        else if(sj == dj){
-            if(si < di){  //devo scendere
-                for(int i = si +1; i < di; i++){
-                    if (s.getPezzo(i, dj) != null) return false;
-                }
-            }else{
-                for(int i = si -1; i > di; i--){
-                    if(s.getPezzo(i,dj) != null) return false;
-                }
+            else if(srcAsse == sj && s.getPezzo(i,destAsseMovimento) != null) {
+                return false;
             }
         }
+
         return true;
     }
+    
+    
+    @Override
+        public boolean traiettoriaDiagonale(Casella da, Casella a, Scacchiera s){
+        int si, sj, di, dj; // s = source  d = destination
+        si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
+        ArrayList<Integer> asseI = getRange(si, di);
+        ArrayList<Integer> asseJ = getRange(sj, dj);
+
+        for(int i =  1; i < asseI.size(); i++){
+            if(s.getPezzo(asseI.get(i), asseJ.get(i)) != null) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    private ArrayList<Integer> getRange(int a, int b) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if(a > b) {
+            for (int i = b; i < a; i++) {
+                res.add(i);
+            }
+        }
+        else {
+            for(int i = a; i < b; i++) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
 }
+    
+    

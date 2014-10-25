@@ -17,9 +17,12 @@ public class Alfiere extends PedinaScacchi implements Traiettoria{
 
     @Override
     public boolean puoiMuovere(Casella da, Casella a, Scacchiera s) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //check se la mossa è legale
-        return Traiettoria(da,a,s);
+        int si, sj, di, dj; // s = source  d = destination
+        si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
+        
+        if (Math.abs(si-di)== Math.abs(sj-dj)){
+            return traiettoriaDiagonale(da,a,s);
+        }else return false;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class Alfiere extends PedinaScacchi implements Traiettoria{
     }
 
     @Override
-    public boolean Traiettoria(Casella da, Casella a, Scacchiera s){
+    public boolean traiettoriaDiagonale(Casella da, Casella a, Scacchiera s){
         int si, sj, di, dj; // s = source  d = destination
         si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
         ArrayList<Integer> asseI = getRange(si, di);
@@ -64,7 +67,11 @@ public class Alfiere extends PedinaScacchi implements Traiettoria{
         }
         return res;
     }
-
+    
+    @Override
+    public boolean traiettoriaDritta(Casella da, Casella a, Scacchiera s){
+        return false;
+    }
 }
     
     

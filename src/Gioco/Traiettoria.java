@@ -8,7 +8,7 @@ package Gioco;
  */
 public interface Traiettoria {
     
-    public boolean Traiettoria(Casella da, Casella a, Scacchiera s);
-    //public boolean TraiettoriaDritta(Scacchiera s);
+    public boolean traiettoriaDiagonale(Casella da, Casella a, Scacchiera s);
+    public boolean traiettoriaDritta(Casella da, Casella a, Scacchiera s);
     
 }

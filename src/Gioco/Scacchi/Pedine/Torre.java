@@ -19,7 +19,7 @@ public class Torre extends PedinaScacchi implements Traiettoria {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if(da.rowIndex == a.rowIndex && da.columnIndex != a.columnIndex ||
                 da.columnIndex == a.columnIndex && da.rowIndex != a.rowIndex){
-            return Traiettoria(da, a, s);
+            return traiettoriaDritta(da, a, s);
         }
         return false;
     }
@@ -36,7 +36,7 @@ public class Torre extends PedinaScacchi implements Traiettoria {
     }
     
     @Override
-    public boolean Traiettoria(Casella da, Casella a, Scacchiera s){
+    public boolean traiettoriaDritta(Casella da, Casella a, Scacchiera s){
         int si, sj, di, dj; // s = source  d = destination
         si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
 
@@ -57,6 +57,11 @@ public class Torre extends PedinaScacchi implements Traiettoria {
         }
 
         return true;
+    }
+    
+    @Override
+    public boolean traiettoriaDiagonale(Casella da, Casella a, Scacchiera s){
+        return false;
     }
 
     

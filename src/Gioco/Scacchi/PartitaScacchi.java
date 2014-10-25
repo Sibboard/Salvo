@@ -266,7 +266,7 @@ public class PartitaScacchi {
          
     }
     
-    public void muovi(Casella a, Casella da) throws CasellaVuotaException, CasellaOccupataException,
+    public void muovi(Casella da, Casella a) throws CasellaVuotaException, CasellaOccupataException,
         MossaIllegaleException, PattaException, TurnoErratoException /*ReSottoScaccoException, ScaccoMattoException*/{
         /* muovi(da,a) deve controllare la legalità della mossa (turno, pezzo, 
         caselle) e in caso deve sollevare le giuste eccezioni */
@@ -286,7 +286,7 @@ public class PartitaScacchi {
             if (pezzo.puoiMuovere(da, a, scacchiera) == true){
                 //controllo del turno
                 try{
-                    if (scacchiera.getPezzo(a).getColore() == scacchiera.getPezzo(da).getColore()){
+                    if (scacchiera.getPezzo(da).getColore() == scacchiera.getPezzo(a).getColore()){
                     throw new CasellaOccupataException();
                     }   
                 }catch(NullPointerException e){
