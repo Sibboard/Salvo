@@ -98,4 +98,13 @@ public class Scacchiera {
         return output;
     }
     //GEtTraversa per stampare la scacchiera aggiungendo le lettere e i numeri (coordinate)
+    
+    public void toStringPartita(){
+        //ciclo la stack di mmosse
+        for(int i = 0; i<this.width; i++){
+            for (int j = 0; j< this.height; j++){
+                
+            }
+        }
+    }
 }

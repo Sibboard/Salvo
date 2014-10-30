@@ -57,7 +57,6 @@ public class Regina extends PedinaScacchi implements Traiettoria{
                 return false;
             }
         }
-
         return true;
     }
     
@@ -73,9 +72,7 @@ public class Regina extends PedinaScacchi implements Traiettoria{
             if(s.getPezzo(asseI.get(i), asseJ.get(i)) != null) {
                 return false;
             }
-
         }
-
         return true;
     }
 
