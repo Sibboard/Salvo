@@ -21,7 +21,7 @@ public class Regina extends PedinaScacchi implements Traiettoria{
         
         if(si == di && sj != dj || sj == dj && si != di){
             return traiettoriaDritta(da, a, s);
-        }else if (Math.abs(si-di)== Math.abs(sj-dj)){
+        }else if (Math.abs(si-di) == Math.abs(sj-dj)){
             return traiettoriaDiagonale(da,a,s);
         }else return false;
     }
@@ -49,12 +49,9 @@ public class Regina extends PedinaScacchi implements Traiettoria{
         int max = Math.max(srcAsse, destAsse);
         int min = Math.min(srcAsse, destAsse);
 
-        for(int i = min + 1; i < max; i++){
-            if(srcAsse == si && s.getPezzo(destAsseMovimento, i) != null) {
+        for(int i = min + 1; i < max; i++) {
+            if((srcAsse == si && s.getPezzo(destAsseMovimento, i) != null) || (srcAsse == sj && s.getPezzo(i,destAsseMovimento) != null)){
                return false;
-            }
-            else if(srcAsse == sj && s.getPezzo(i,destAsseMovimento) != null) {
-                return false;
             }
         }
         return true;

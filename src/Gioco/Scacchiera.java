@@ -66,9 +66,7 @@ public class Scacchiera {
     @Override
     public String toString() throws NullPointerException{
         String output = "";
-        
-        System.out.println("entrato in scacchiera.toString");
-        System.out.println(scacchiera[2][2]);
+
         for(int i = 0; i < this.height; i++){
             for(int j = 0; j < this.width; j++){
                 //System.out.println("entrato  nel doppio ciclo in scacchiera.toString");
@@ -93,8 +91,7 @@ public class Scacchiera {
             }
             output += "\n";
         }
-        System.out.println("stampo OUTPUT");
-        System.out.println(output);
+
         return output;
     }
     //GEtTraversa per stampare la scacchiera aggiungendo le lettere e i numeri (coordinate)

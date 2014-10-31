@@ -89,7 +89,7 @@ public class PartitaScacchi {
         
         scacchiera = new Scacchiera(8,8);
         String[] fen_notation = fen.split(" ");
-        Partita[0] = fen_notation; //inizializzo la stringa della partita con quella in input
+        //Partita[0] = fen_notation; //inizializzo la stringa della partita con quella in input
         int tra = 0; int ind = 0;
         
         /*ciclo che parsa la prima parte della notazione fen, quella che 
@@ -269,6 +269,10 @@ public class PartitaScacchi {
     public void SetScacchiera(){
          
     }
+
+    public Scacchiera getScacchiera() {
+        return scacchiera;
+    }
     
     public void muovi(Casella da, Casella a) throws CasellaVuotaException, CasellaOccupataException,
         MossaIllegaleException, PattaException, TurnoErratoException /*ReSottoScaccoException, ScaccoMattoException*/{
@@ -317,7 +321,7 @@ public class PartitaScacchi {
         }
         
         /* arrivati a questo punto la mossa dovrebbe essere regolare e corretta e quindi deve
-        essere eseguita dal programma, e salvata opportunamente in una stack*/
+        essere eseguita dal programma, e salvata opportunamente in uno stack*/
         
         Mossa mossa = new Mossa(scacchiera,turno,da,a);
         
@@ -335,7 +339,7 @@ public class PartitaScacchi {
         
         history.push(mossa);
         
-        
+
         /*eccezioni ==
         CasellaVuotaException : sollevata se la casella da è vuota;
         
@@ -365,12 +369,13 @@ public class PartitaScacchi {
         
         
     }
+    /*
     public void updatePartita(Scacchiera s){
         for(int riga : s){
             for(int colonna : s[riga])
-                
+
         }
-    }
+    }*/
     
     
     public void abbandona(){

@@ -49,22 +49,19 @@ public class Alfiere extends PedinaScacchi implements Traiettoria{
             }
 
         }
-
+        
         return true;
     }
 
     private ArrayList<Integer> getRange(int a, int b) {
         ArrayList<Integer> res = new ArrayList<Integer>();
-        if(a > b) {
-            for (int i = b; i < a; i++) {
-                res.add(i);
-            }
+        int min = Math.min(a,b);
+        int max = Math.max(a,b);
+
+        for (int i = min; i < max; i++) {
+            res.add(i);
         }
-        else {
-            for(int i = a; i < b; i++) {
-                res.add(i);
-            }
-        }
+
         return res;
     }
     
