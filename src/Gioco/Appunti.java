@@ -7,9 +7,10 @@ package Gioco;
 public class Appunti {
     
     /*
+    aggiunto controllo ripetizione di posizione con hashMap
     
-    -- usare i generics per implementare i tipi turno e giocatore?
-            //overridare equals per i tipi turno e giocatore
+    
+    -- fare una funzione interpreta_fen separandola dal costruttore??
     
     
     --  aggiungere booleano nelle torri e nel re per arrocco---- NON DOVRE_BBE SERVIRE

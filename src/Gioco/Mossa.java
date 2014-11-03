@@ -34,7 +34,7 @@ public class Mossa {
     
     
     //------- NON SERVONO SETTER E GETTER ?!?! ora 
-    public void getPezzo_mangiato(){
+    public boolean getPezzo_mangiato(){
         return this.pezzo_mangiato;
     }
     public void setPezzo_mangiato(boolean value){

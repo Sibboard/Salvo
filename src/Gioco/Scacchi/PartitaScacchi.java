@@ -22,7 +22,9 @@ public class PartitaScacchi {
     public static Scacchiera scacchiera;
     private Turno turno;
     public Stack <Mossa> history = new Stack();
-    private String[] Partita;
+    private String Partita;
+    private Map <String, Integer> scacco_perpetuoB = new HashMap();
+    private Map <String, Integer> scacco_perpetuoN = new HashMap();
     
    
     public PartitaScacchi() throws InputErratoException
@@ -89,7 +91,7 @@ public class PartitaScacchi {
         
         scacchiera = new Scacchiera(8,8);
         String[] fen_notation = fen.split(" ");
-        Partita[0] = fen_notation; //inizializzo la stringa della partita con quella in input
+        Partita = fen_notation[0]; //inizializzo la stringa della partita con quella in input
         int tra = 0; int ind = 0;
         
         /*ciclo che parsa la prima parte della notazione fen, quella che 
@@ -270,12 +272,35 @@ public class PartitaScacchi {
          
     }
     
+    public void ripetizione_posizione() throws PattaException{
+        String partita = this.Partita;
+        if (turno == Turno.BIANCO ){ 
+            if(scacco_perpetuoB.containsKey(partita)){
+                if(scacco_perpetuoB.get(partita) == 3 ){ throw new PattaException();
+                }else{
+                    int temp = scacco_perpetuoB.get(partita) + 1;
+                    scacco_perpetuoB.put(partita, temp);
+                }
+            }else{scacco_perpetuoB.put(partita, 1);}
+        }else{ //turno nero
+            if(scacco_perpetuoN.containsKey(partita)){
+                if(scacco_perpetuoN.get(partita) == 3 ){ throw new PattaException();
+                }else{
+                    int temp = scacco_perpetuoN.get(partita) + 1;
+                    scacco_perpetuoN.put(partita, temp);
+                }
+            }else{scacco_perpetuoN.put(partita, 1);}
+        }
+    }
+            
+    
     public void muovi(Casella da, Casella a) throws CasellaVuotaException, CasellaOccupataException,
         MossaIllegaleException, PattaException, TurnoErratoException /*ReSottoScaccoException, ScaccoMattoException*/{
         /* muovi(da,a) deve controllare la legalità della mossa (turno, pezzo, 
         caselle) e in caso deve sollevare le giuste eccezioni */
         Pezzo pezzo_da;
         Pezzo pezzo_a;
+        String partita = this.Partita; 
         
         
         
@@ -284,6 +309,17 @@ public class PartitaScacchi {
         chiamata a puoimuovere > mossaillegale
         Pattaexception>scaccomatto??
         */
+        //--------------- scacco check
+        
+        //--------------patta check
+        // ripetizione di posizione
+        
+        try{
+            ripetizione_posizione();
+        }catch(PattaException e){
+            throw new PattaException();
+        }
+        
         
         try{
             pezzo_da = scacchiera.getPezzo(da);
@@ -299,7 +335,6 @@ public class PartitaScacchi {
             //if scacco = true ->
             
             if (pezzo_da.puoiMuovere(da, a, scacchiera) == true){
-                //controllo del turno
                 try{
                     if (scacchiera.getPezzo(da).getColore() == scacchiera.getPezzo(a).getColore()){
                     throw new CasellaOccupataException();
