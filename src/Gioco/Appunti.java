@@ -7,13 +7,15 @@ package Gioco;
 public class Appunti {
     
     /*
-    aggiunto controllo ripetizione di posizione con hashMap
+    cominciato materiale insufficiente
+    --
     
+    -- stack di pezzimangiati puo servire ad altro oltre a scoprire che è patta per materiale insufficiente??
     
     -- fare una funzione interpreta_fen separandola dal costruttore??
     
     
-    --  aggiungere booleano nelle torri e nel re per arrocco---- NON DOVRE_BBE SERVIRE
+    --  aggiungere booleano nelle torri e nel re per arrocco---- NON DOVREBBE SERVIRE
     
     -- la stack delle mosse magari la faccio private (TODO implementare setter e getter)
         -- forse dovrebbe essere uno stack di coppie (stringa_fen, mossa)
@@ -29,8 +31,19 @@ public class Appunti {
     -- in muovi alla fine controlla: scacco\ pedone promozione1\....ù
     
     
-    -per i pedoni?? 
+    ---RE
     
+    ---PEDONI
+    
+    
+    
+    
+    
+    ----------------------------------------
+    MANCANO
+    -pedoni
+    
+    - gestire INPUT: controlla la correttezza delle lettere, ma non se sono di più o di meno
     
     */
     
