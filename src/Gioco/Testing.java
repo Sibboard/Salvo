@@ -40,17 +40,20 @@ public class Testing {
             System.out.print(p);
             */
             
-            PartitaScacchi p1 = new PartitaScacchi("8/1q6/8/8/8/8/8/8");
+            PartitaScacchi p1 = new PartitaScacchi("8/1Q6/8/8/8/8/8/8 w ");
+            //PartitaScacchi p1 = new PartitaScacchi("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w ");
             Casella da = new Casella(1,1);
-            Casella a = new Casella(7,7);
+            Casella a = new Casella(7,1);
             p1.muovi(da, a);
             System.out.print(p1);
-            Casella a2 = new Casella(1,7);
+            //p1.muovi(a, da);
+            //System.out.print(p1);
+            Casella a2 = new Casella(8,1);
             p1.muovi(a, a2);
             System.out.print(p1);
-            p1.muovi(a2, da);
+            /*p1.muovi(a2, da);
             System.out.print(p1);
-
+             */
 
             //print = p.toString();
             /*

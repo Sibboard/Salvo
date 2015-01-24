@@ -1,5 +1,5 @@
 package test.Gioco.Scacchi.Pedine;
-
+/*
 import Gioco.Casella;
 import Gioco.Eccezioni.*;
 import Gioco.Pezzo;
@@ -54,3 +54,5 @@ public class ReginaTest {
     }
 
 }
+
+*/

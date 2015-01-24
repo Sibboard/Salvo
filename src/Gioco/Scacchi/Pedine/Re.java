@@ -39,4 +39,7 @@ public class Re extends PedinaScacchi {
                 else return 'k';
     }
     
+    public Casella getCasella(){
+        return 
+    }
 }

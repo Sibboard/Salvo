@@ -8,24 +8,25 @@ package Gioco;
  */
 public class Mossa {
     
-    public Turno turno;
     Casella a;
     Casella da;
     private boolean pezzo_mangiato;
     
     /**
      *
-     * @param s
-     * @param turnoin
-     * @param source
-     * @param dest
      */
-    public Mossa(Scacchiera s, Turno turnoin, Casella source, Casella dest){
-        this.turno = turnoin;
+    public Mossa(Scacchiera s, Giocatore turno, Casella source, Casella dest){
+        //this.turno = turnoin; me lo passa perchè salvarlo
         
-        if(s.getPezzo(a).getColore() != s.getPezzo(da).getColore() && s.getPezzo(a) != null){
-            this.pezzo_mangiato = true;
-        }else this.pezzo_mangiato = false;
+        try{
+            if(s.getPezzo(a).getColore() != s.getPezzo(da).getColore() && s.getPezzo(a) != null){
+                this.pezzo_mangiato = true;
+            }else this.pezzo_mangiato = false;
+        }catch (NullPointerException e){
+            
+            
+        }
+          
         
         this.da = source;
         this.a = dest;

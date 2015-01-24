@@ -36,14 +36,25 @@ public class Appunti {
     ---PEDONI
     
     
+    stofacendo sottoScacco() in Partitascacchi, però mi serve da fare getRe()in Scacchiera 
+    che mi ritorna la posizione del re.. devo provare il puoi
+    muovere() per i pezzi dell'avversario ma puoi muovere prende in input due 
+    caselle e qui casca l'asino perchè io non ho le caselle associate ai pezzi
     
+    dovro mettere una map di caselle
     
+    controllare che  i pezzi non finiscano fuori dalla scacchiera, camciare la casellla
     
     ----------------------------------------
     MANCANO
     -pedoni
     
     - gestire INPUT: controlla la correttezza delle lettere, ma non se sono di più o di meno
+    
+    -mettere turno dopo la scacchirea nella sampa
+    ----commit
+    -aggiunti 2 set con i pezzi in gioco per ogni giocatore
+    -togliere enum turno, lasciando giocatore, e mettere una variabile (globale)? per tenere il turno
     
     */
     
