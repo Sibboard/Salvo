@@ -9,8 +9,8 @@ import Gioco.Scacchi.*;
  */
 public class Cavallo extends PedinaScacchi{
     
-    public Cavallo(Giocatore colore){
-        super(colore);
+    public Cavallo(Colore giocatore){
+        super(giocatore);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class Cavallo extends PedinaScacchi{
     }
 
     @Override
-    public Giocatore getColore() {
-        return this.colore;
+    public Colore getColore() {
+        return this.giocatore;
     }
     
     @Override
     public char getNome(){
-        if(this.getColore() == Giocatore.BIANCO) return 'N';
+        if(this.getColore() == Colore.BIANCO) return 'N';
                 else return 'n';
     }
         

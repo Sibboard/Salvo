@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class Alfiere extends PedinaScacchi implements Traiettoria{
 
-    public Alfiere(Giocatore colore) {
-        super(colore);
+    public Alfiere(Colore giocatore) {
+        super(giocatore);
     }
 
     @Override
@@ -26,13 +26,13 @@ public class Alfiere extends PedinaScacchi implements Traiettoria{
     }
 
     @Override
-    public Giocatore getColore() {
-        return this.colore;
+    public Colore getColore() {
+        return this.giocatore;
     }
     
     @Override
     public char getNome(){
-        if(this.getColore() == Giocatore.BIANCO) return 'B';
+        if(this.getColore() == Colore.BIANCO) return 'B';
                 else return 'b';
     }
 

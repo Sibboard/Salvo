@@ -11,8 +11,8 @@ public class Re extends PedinaScacchi {
     
     private static boolean primamossa;
 
-    public Re(Giocatore colore) {
-        super(colore);
+    public Re(Colore giocatore) {
+        super(giocatore);
         primamossa = true;
     }
     
@@ -29,13 +29,13 @@ public class Re extends PedinaScacchi {
     }
 
     @Override
-    public Giocatore getColore() {
-        return this.colore;    
+    public Colore getColore() {
+        return this.giocatore;    
     }
     
     @Override
     public char getNome(){
-        if(this.getColore() == Giocatore.BIANCO) return 'K';
+        if(this.getColore() == Colore.BIANCO) return 'K';
                 else return 'k';
     }
     

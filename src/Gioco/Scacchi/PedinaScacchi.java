@@ -9,10 +9,10 @@ import Gioco.*;
  */
 public abstract class PedinaScacchi implements Pezzo {
     
-    public final Giocatore colore;
+    public final Colore giocatore;
     
-    public PedinaScacchi (Giocatore color){
-        this.colore = color;
+    public PedinaScacchi (Colore giocatore){
+        this.giocatore = giocatore;
     }
        
     @Override

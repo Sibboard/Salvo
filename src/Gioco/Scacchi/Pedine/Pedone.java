@@ -2,7 +2,7 @@ package Gioco.Scacchi.Pedine;
 
 import Gioco.*;
 import Gioco.Scacchi.*;
-import Gioco.Giocatore.*;
+import Gioco.Colore.*;
 import java.lang.Math.*;
 
 /**
@@ -14,10 +14,10 @@ public class Pedone extends PedinaScacchi {
     private boolean doppio;
     
 
-    public Pedone(Giocatore colore) {
-        super(colore);
+    public Pedone(Colore giocatore) {
+        super(giocatore);
         doppio = true;
-        //un controllo per le partite gia iniziate? distinto per ogni colore?
+        //un controllo per le partite gia iniziate? distinto per ogni giocatore?
     }
 
     @Override
@@ -51,19 +51,21 @@ public class Pedone extends PedinaScacchi {
     }
     
     public boolean direzioneGiocatore(int da_r, int a_r){
-        if(this.getColore() == Giocatore.BIANCO && da_r > a_r) return true;
-        else if(this.getColore() == Giocatore.NERO && da_r < a_r) return true;
+        /*controlla che il pedone si stia muovendo nella direzione permessa al giocatore*/
+        
+        if(this.getColore() == Colore.BIANCO && da_r > a_r) return true;
+        else if(this.getColore() == Colore.NERO && da_r < a_r) return true;
         else return false;
     }
 
     @Override
-    public Giocatore getColore() {
-        return this.colore;
+    public Colore getColore() {
+        return this.giocatore;
     }
     
     @Override
     public char getNome(){
-        if(this.getColore() == Giocatore.BIANCO) return 'P';
+        if(this.getColore() == Colore.BIANCO) return 'P';
                 else return 'p';
     }
 

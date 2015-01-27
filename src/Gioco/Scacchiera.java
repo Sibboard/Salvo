@@ -13,8 +13,10 @@ public class Scacchiera {
     public int width, height;
     
     
-    /*costruttore che inizializza una matrice height*width di oggetti Pezzo e memorizza le sue dimensioni */
+    
     public Scacchiera(int h, int w){
+        /*costruttore che inizializza una matrice height*width di oggetti Pezzo e memorizza le sue dimensioni */
+        
         scacchiera = new Pezzo[h][w];
         /*for(int i = 0; i< 8; i++){
             for(int j = 0; j<8; j++){
@@ -26,13 +28,15 @@ public class Scacchiera {
         this.width = w;
     }
     
-    /*getPezzo ritorna il pezzo di una casella*/
     public Pezzo getPezzo(Casella c){
+        /*getPezzo ritorna il pezzo di una casella*/
+        
         return scacchiera[c.rowIndex][c.columnIndex];
     }
     
-    /* getPezzo che prende i ninput gli indici di scacchiera */
+    
     public Pezzo getPezzo(int traversa, int indice){
+        /* getPezzo che prende i ninput gli indici di scacchiera */
         return scacchiera[traversa][indice];
     }
     
@@ -45,14 +49,15 @@ public class Scacchiera {
     //System.out.println(PezziNeri);
             //System.out.println(PezziBianchi);
     
-    /*aggiunge i pezzi alla scacchiera*/
     public void inserisci(int traversa, int indice, Pezzo p){
+        /*metodo che inserisce un pezzo all'interno della scacchiera*/
+        
         //System.out.println("entrato in inserisci");
         //devo controllare se posos aggiungere
         //controllare se sbrocca se gli passo NULL come Pezzo da mettere in scacchiera
         scacchiera[traversa][indice] = p;
         try{
-            if (p.getColore() == Giocatore.BIANCO) 
+            if (p.getColore() == Colore.BIANCO) 
                  Gioco.Scacchi.PartitaScacchi.PezziBianchi.add(p);
             else  Gioco.Scacchi.PartitaScacchi.PezziNeri.add(p);
         }catch(NullPointerException e){
@@ -62,17 +67,21 @@ public class Scacchiera {
         //System.out.println(p);
     }
     public void elimina(Casella c){
+        /*metodo che elimina nu pezzo dalla scacchiera*/
+        
         System.out.println("entrato in elimina");
         Pezzo temp = this.getPezzo(c.rowIndex, c.columnIndex);
         this.inserisci(c.rowIndex, c.columnIndex, null);
         
-        if (temp.getColore() == Giocatore.BIANCO) 
+        if (temp.getColore() == Colore.BIANCO) 
              Gioco.Scacchi.PartitaScacchi.PezziBianchi.remove(temp);
         else Gioco.Scacchi.PartitaScacchi.PezziNeri.remove(temp);
  
     }
     
     public void sposta(Casella a, Casella da, Pezzo p){
+        /*metodo che sposta un pezzo tra due casella vuote*/
+        
         scacchiera[a.rowIndex][a.columnIndex] = p;
         scacchiera[da.rowIndex][da.columnIndex] = null;
     }
@@ -119,16 +128,36 @@ public class Scacchiera {
             }
         }
     }
+    
+    public Casella getCasella(Pezzo p, Colore c){
+        /*metodo che passandogli un pezzo ritorna "la" casella dove si trova il pezzo*/
+        
+        for(int i = 0; i<this.width; i++){
+            for (int j = 0; j< this.height; j++){
+                try{
+                    if(this.getPezzo(i,j) instanceof p &&
+                            this.getPezzo(i,j).getColore() == c)
+                        //è sufficiente this.getpezzo == p ??????
+                        return new Casella(i,j);
+                }catch (NullPointerException e){}
+            }
+        }
+        return new Casella (8,8);
+
+    }
    
-    public Casella getRe(Giocatore color){
+    public Casella getRe(Colore color){
+        /*metodo che torna la casella dove si trova i re del colore passato*/
+        
         for(int i = 0; i<this.width; i++){
             for (int j = 0; j< this.height; j++){
                 try{
                     if(this.getPezzo(i,j) instanceof Re &&
                             this.getPezzo(i,j).getColore() == color)
-                        
-                        }
+                        return new Casella(i,j);
+                }catch (NullPointerException e){}
             }
         }
+        return new Casella (8,8);
     }
 }

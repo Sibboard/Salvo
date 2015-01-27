@@ -15,7 +15,7 @@ public class Mossa {
     /**
      *
      */
-    public Mossa(Scacchiera s, Giocatore turno, Casella source, Casella dest){
+    public Mossa(Scacchiera s, Colore turno, Casella source, Casella dest){
         //this.turno = turnoin; me lo passa perchè salvarlo
         
         try{

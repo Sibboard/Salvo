@@ -12,7 +12,7 @@ public interface Pezzo {
         /* controllare sul sito il terrzo argomento*/
         /* controlla se la mossa scelta per il pezzo è legale */
     
-    public Giocatore getColore();
+    public Colore getColore();
             /* ritorna il colore del pezzo che si vuole */
     
     //public rimuovi pedina??? mettere controllo sulla sufficienza dei pezzi da scacchiera
@@ -20,6 +20,10 @@ public interface Pezzo {
     public char getNome();
         /*ritorna il char che rappresenta il pezzo"*/
     
+    /*
+    public Casella getCasella();
+        /*mi ritorna la casella dove si trova il pezzo, metodo di servizio per le chiamate a puoi muovere */
+   
     @Override
     public String toString();
 }

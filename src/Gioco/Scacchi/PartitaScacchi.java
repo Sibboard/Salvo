@@ -4,7 +4,6 @@ import Gioco.Scacchi.Eccezioni.PattaException;
 import Gioco.*;
 //import Gioco.Turno;  non necessario??
 import Gioco.Eccezioni.*;
-import static Gioco.Giocatore.BIANCO;
 import Gioco.Scacchi.Pedine.*;
 import Gioco.Scacchi.Eccezioni.*;
 import java.util.*;
@@ -23,7 +22,7 @@ public class PartitaScacchi {
     public static Scacchiera scacchiera;
     public Stack <Mossa> history = new Stack();
     private String Partita;
-    public Giocatore turno;
+    public Colore turno;
     private String enPassant;
     private String arrocco;
     public static Set <Pezzo> PezziBianchi;
@@ -48,34 +47,34 @@ public class PartitaScacchi {
                 char pedina = an[i].charAt(j);
                 switch(pedina){
                     case 'T':
-                       scacchiera.inserisci(i, j, new Torre(Giocatore.BIANCO)); break;
+                       scacchiera.inserisci(i, j, new Torre(Colore.BIANCO)); break;
                     case 't':
-                       scacchiera.inserisci(i, j, new Torre(Giocatore.NERO)); break;
+                       scacchiera.inserisci(i, j, new Torre(Colore.NERO)); break;
                     
                     case 'C':
-                        scacchiera.inserisci(i, j, new Cavallo(Giocatore.BIANCO)); break;
+                        scacchiera.inserisci(i, j, new Cavallo(Colore.BIANCO)); break;
                     case 'c':
-                        scacchiera.inserisci(i, j, new Cavallo(Giocatore.NERO)); break;
+                        scacchiera.inserisci(i, j, new Cavallo(Colore.NERO)); break;
 
                     case 'A':
-                        scacchiera.inserisci(i, j, new Alfiere(Giocatore.BIANCO)); break;
+                        scacchiera.inserisci(i, j, new Alfiere(Colore.BIANCO)); break;
                     case 'a':
-                        scacchiera.inserisci(i, j, new Alfiere(Giocatore.NERO)); break;
+                        scacchiera.inserisci(i, j, new Alfiere(Colore.NERO)); break;
 
                     case 'D':
-                        scacchiera.inserisci(i, j, new Regina(Giocatore.BIANCO)); break;
+                        scacchiera.inserisci(i, j, new Regina(Colore.BIANCO)); break;
                     case 'd':
-                        scacchiera.inserisci(i, j, new Regina(Giocatore.NERO)); break;
+                        scacchiera.inserisci(i, j, new Regina(Colore.NERO)); break;
 
                     case 'R':
-                        scacchiera.inserisci(i, j, new Re(Giocatore.BIANCO)); break;
+                        scacchiera.inserisci(i, j, new Re(Colore.BIANCO)); break;
                     case 'r':
-                        scacchiera.inserisci(i, j, new Re(Giocatore.NERO)); break;
+                        scacchiera.inserisci(i, j, new Re(Colore.NERO)); break;
 
                     case 'P':
-                        scacchiera.inserisci(i, j, new Pedone(Giocatore.BIANCO)); break;
+                        scacchiera.inserisci(i, j, new Pedone(Colore.BIANCO)); break;
                     case 'p':
-                        scacchiera.inserisci(i, j, new Pedone(Giocatore.NERO)); break;
+                        scacchiera.inserisci(i, j, new Pedone(Colore.NERO)); break;
 
                     case '.':
                         scacchiera.inserisci(i, j, null); break;
@@ -123,34 +122,34 @@ public class PartitaScacchi {
             switch(pedina){
                 
                 case 'R':
-                    scacchiera.inserisci(tra, ind, new Torre(Giocatore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Torre(Colore.BIANCO)); ind++; break;
                 case 'r':
-                    scacchiera.inserisci(tra, ind, new Torre(Giocatore.NERO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Torre(Colore.NERO)); ind++; break;
                      
                 case 'N':
-                    scacchiera.inserisci(tra, ind, new Cavallo(Giocatore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Cavallo(Colore.BIANCO)); ind++; break;
                 case 'n':
-                    scacchiera.inserisci(tra, ind, new Cavallo(Giocatore.NERO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Cavallo(Colore.NERO)); ind++; break;
 
                 case 'B':
-                    scacchiera.inserisci(tra, ind, new Alfiere(Giocatore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Alfiere(Colore.BIANCO)); ind++; break;
                 case 'b':
-                    scacchiera.inserisci(tra, ind, new Alfiere(Giocatore.NERO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Alfiere(Colore.NERO)); ind++; break;
                     
                 case 'Q':
-                    scacchiera.inserisci(tra, ind, new Regina(Giocatore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Regina(Colore.BIANCO)); ind++; break;
                 case 'q':
-                    scacchiera.inserisci(tra, ind, new Regina(Giocatore.NERO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Regina(Colore.NERO)); ind++; break;
 
                 case 'K':
-                    scacchiera.inserisci(tra, ind, new Re(Giocatore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Re(Colore.BIANCO)); ind++; break;
                 case 'k':
-                    scacchiera.inserisci(tra, ind, new Re(Giocatore.NERO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Re(Colore.NERO)); ind++; break;
 
                 case 'P':
-                    scacchiera.inserisci(tra, ind, new Pedone(Giocatore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Pedone(Colore.BIANCO)); ind++; break;
                 case 'p':
-                    scacchiera.inserisci(tra, ind, new Pedone(Giocatore.NERO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Pedone(Colore.NERO)); ind++; break;
                                    
                 case '/':
                     tra ++; ind = 0; break;
@@ -167,10 +166,10 @@ public class PartitaScacchi {
         // setto il turno 
         
         if ("w".equals(fen_notation[1]) || "W".equals(fen_notation[1])){
-            turno = Giocatore.BIANCO;
-        }else turno = Giocatore.NERO;
+            turno = Colore.BIANCO;
+        }else turno = Colore.NERO;
         
-        if (BIANCO == turno){
+        if (Colore.BIANCO == turno){
         
     }
         
@@ -205,7 +204,7 @@ public class PartitaScacchi {
             
         }
      
-        if (turno.equals(Giocatore.BIANCO)) System.out.println("SSDGSDHSFGHSDGHD");
+
         //-------
         
         //System.out.print(scacchiera);
@@ -293,7 +292,7 @@ public class PartitaScacchi {
     
     
     public void muovi(Casella da, Casella a) throws CasellaVuotaException, CasellaOccupataException,
-        MossaIllegaleException, PattaException, TurnoErratoException /*ReSottoScaccoException, ScaccoMattoException*/{
+        MossaIllegaleException, PattaException, TurnoErratoException, ReSottoScaccoException /* ScaccoMattoException*/{
         /* muovi(da,a) deve controllare la legalità della mossa (turno, pezzo, 
         caselle) e in caso deve sollevare le giuste eccezioni */
         Pezzo pezzo_da;
@@ -313,7 +312,7 @@ public class PartitaScacchi {
         // ripetizione di posizione
         
         try{
-            ripetizione_posizione();
+            ripetizionePosizione();
             materialeInsufficiente();
         }catch(PattaException e){
             throw new PattaException();
@@ -380,25 +379,42 @@ public class PartitaScacchi {
         
         history.push(mossa);
         System.out.print(history);
+        if (turno == Colore.NERO) turno = Colore.BIANCO;
+        else turno = Colore.NERO;
+        
+        if (this.sottoScacco(turno)) throw new ReSottoScaccoException();
     }
     
-    public boolean sottoScacco(Giocatore turno)){
-        //deve essere chiamata subito dopo una mossa, prima del cambio di turno
+    public boolean sottoScacco(Colore turno){
+        /* metodo che ritorna true se trova che un pezzo del colore turno
+        minaccia il re... deve essere chiamata subito dopo una mossa, prima del cambio di turno*/
         
-        //posizione re = get_Re
         
-        //fatto per i bianchi 
-        if (turno == Giocatore.BIANCO){
-            for(Pezzo p : PezziBianchi){
-                if(p.puoiMuovere())
-            }
-        }    
+        switch (turno){
+                case BIANCO:{ Casella posizione_re = scacchiera.getRe(Colore.NERO); 
+                    for(Pezzo p : PezziBianchi){
+                        if(p.puoiMuovere(scacchiera.getCasella(p, turno), posizione_re, scacchiera)){
+                            return true;
+                        }
+                    }
+                }
+                
+                case NERO:{Casella posizione_re = scacchiera.getRe(Colore.BIANCO); 
+                    for(Pezzo p : PezziNeri){
+                        if(p.puoiMuovere(scacchiera.getCasella(p, turno), posizione_re, scacchiera)){
+                            return true;
+                        }
+                    }
+                }
+        }  
         return false;
     }
     
-    public void ripetizione_posizione() throws PattaException{
+    public void ripetizionePosizione() throws PattaException{
+        /*metodo che controlla se si verifica la ripetizione di posizione*/
+    
         String partita = this.Partita;
-        if (turno == Giocatore.BIANCO ){ 
+        if (turno == Colore.BIANCO ){ 
             if(scacco_perpetuoB.containsKey(partita)){
                 if(scacco_perpetuoB.get(partita) == 3 ){ throw new PattaException();
                 }else{
@@ -419,6 +435,8 @@ public class PartitaScacchi {
     
     
     public void materialeInsufficiente() throws PattaException{
+        /*metodo che controlla se si verifica la patta per materiale insufficiente*/
+    
         for(int i = 0; i<scacchiera.height; i++){
             for(int j = 0; j<scacchiera.width; j++){
                 if (scacchiera.getPezzo(i,j) != null) {
@@ -434,6 +452,7 @@ public class PartitaScacchi {
     }
     
     public void pezzoRemove(Pezzo p, Set <Pezzo> P){
+        /*rimuove i pezzi dai set dei pezzi in gioco*/
         P.remove(p);
     }
     /*
@@ -445,12 +464,6 @@ public class PartitaScacchi {
     /*metodo che permette l'annullamento di una mossa
     sfruttare questo metodo per controllare lo scaccoal re*/
     //}
-            
-     
-    
-    //public String toString(){
-        /*genera come output una stringa chestampa la posizione corrente, e a chi tocca muovere*/
-        
-    //}
+           
     
 }

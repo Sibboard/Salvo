@@ -9,8 +9,8 @@ import Gioco.Scacchi.*;
  */
 public class Torre extends PedinaScacchi implements Traiettoria {
 
-    public Torre(Giocatore colore) {
-        super(colore);
+    public Torre(Colore giocatore) {
+        super(giocatore);
         //public boolean arrocco;
     }
 
@@ -25,13 +25,13 @@ public class Torre extends PedinaScacchi implements Traiettoria {
     }
 
     @Override
-    public Giocatore getColore() {
-        return this.colore;
+    public Colore getColore() {
+        return this.giocatore;
     }
     
     @Override
     public char getNome(){
-        if(this.getColore() == Giocatore.BIANCO) return 'R';
+        if(this.getColore() == Colore.BIANCO) return 'R';
                 else return 'r';
     }
     
