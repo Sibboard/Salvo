@@ -29,17 +29,9 @@ public class Re extends PedinaScacchi {
     }
 
     @Override
-    public Colore getColore() {
-        return this.giocatore;    
-    }
-    
-    @Override
     public char getNome(){
-        if(this.getColore() == Colore.BIANCO) return 'K';
+        if(this.giocatore == Colore.BIANCO) return 'K';
                 else return 'k';
     }
     
-    public Casella getCasella(){
-        return 
-    }
 }

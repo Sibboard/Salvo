@@ -22,7 +22,7 @@ public class Casella {
         this.columnIndex = c;
     }
     
-    public static void inserisci(Casella c, Pezzo p){
+    //public static void inserisci(Casella c, Pezzo p){
         //TODO
-    }
+    
 }

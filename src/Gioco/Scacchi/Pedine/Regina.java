@@ -25,15 +25,10 @@ public class Regina extends PedinaScacchi implements Traiettoria{
             return traiettoriaDiagonale(da,a,s);
         }else return false;
     }
-
-    @Override
-    public Colore getColore() {
-        return this.giocatore;
-    }
-    
+ 
     @Override
     public char getNome(){
-        if(this.getColore() == Colore.BIANCO) return 'Q';
+        if(this.giocatore == Colore.BIANCO) return 'Q';
                 else return 'q';
     }
     
@@ -76,14 +71,12 @@ public class Regina extends PedinaScacchi implements Traiettoria{
     private ArrayList<Integer> getRange(int a, int b) {
         ArrayList<Integer> res = new ArrayList<Integer>();
         if(a > b) {
-            for (int i = b; i < a; i++) {
-                res.add(i);
-            }
+            for (int i = b; i < a; i++) res.add(i);
+            
         }
         else {
-            for(int i = a; i < b; i++) {
-                res.add(i);
-            }
+            for(int i = a; i < b; i++) res.add(i);
+            
         }
         return res;
     }

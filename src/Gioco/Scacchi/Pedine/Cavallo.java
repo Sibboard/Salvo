@@ -29,13 +29,8 @@ public class Cavallo extends PedinaScacchi{
     }
 
     @Override
-    public Colore getColore() {
-        return this.giocatore;
-    }
-    
-    @Override
     public char getNome(){
-        if(this.getColore() == Colore.BIANCO) return 'N';
+        if(this.giocatore == Colore.BIANCO) return 'N';
                 else return 'n';
     }
         

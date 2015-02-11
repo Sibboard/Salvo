@@ -28,16 +28,16 @@ public class Scacchiera {
         this.width = w;
     }
     
-    public Pezzo getPezzo(Casella c){
+    public PedinaScacchi getPezzo(Casella c){
         /*getPezzo ritorna il pezzo di una casella*/
         
-        return scacchiera[c.rowIndex][c.columnIndex];
+        return (PedinaScacchi) scacchiera[c.rowIndex][c.columnIndex];
     }
     
     
-    public Pezzo getPezzo(int traversa, int indice){
+    public PedinaScacchi getPezzo(int traversa, int indice){
         /* getPezzo che prende i ninput gli indici di scacchiera */
-        return scacchiera[traversa][indice];
+        return (PedinaScacchi)scacchiera[traversa][indice];
     }
     
     /* metodo per settare null le caselle vuote+ */
@@ -46,16 +46,16 @@ public class Scacchiera {
         scacchiera[traversa][indice] = null;
     }
     
-    //System.out.println(PezziNeri);
-            //System.out.println(PezziBianchi);
     
-    public void inserisci(int traversa, int indice, Pezzo p){
+    public void inserisci(int traversa, int indice, PedinaScacchi p){
         /*metodo che inserisce un pezzo all'interno della scacchiera*/
         
         //System.out.println("entrato in inserisci");
         //devo controllare se posos aggiungere
         //controllare se sbrocca se gli passo NULL come Pezzo da mettere in scacchiera
         scacchiera[traversa][indice] = p;
+        p.setCasella(new Casella(traversa, indice));
+        
         try{
             if (p.getColore() == Colore.BIANCO) 
                  Gioco.Scacchi.PartitaScacchi.PezziBianchi.add(p);
@@ -68,22 +68,24 @@ public class Scacchiera {
     }
     public void elimina(Casella c){
         /*metodo che elimina nu pezzo dalla scacchiera*/
-        
         System.out.println("entrato in elimina");
-        Pezzo temp = this.getPezzo(c.rowIndex, c.columnIndex);
+        PedinaScacchi temp = this.getPezzo(c.rowIndex, c.columnIndex);
         this.inserisci(c.rowIndex, c.columnIndex, null);
         
         if (temp.getColore() == Colore.BIANCO) 
              Gioco.Scacchi.PartitaScacchi.PezziBianchi.remove(temp);
         else Gioco.Scacchi.PartitaScacchi.PezziNeri.remove(temp);
- 
+        temp.setCasella();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+        
     }
     
-    public void sposta(Casella a, Casella da, Pezzo p){
+    public void sposta(Casella a, Casella da, PedinaScacchi p){
         /*metodo che sposta un pezzo tra due casella vuote*/
         
         scacchiera[a.rowIndex][a.columnIndex] = p;
         scacchiera[da.rowIndex][da.columnIndex] = null;
+        p.setCasella(new Casella(da.rowIndex, da.columnIndex));
     }
 
         
@@ -129,8 +131,11 @@ public class Scacchiera {
         }
     }
     
+    /*
+    //----- I METODI SEGUENTI NOPN DOVREBBERO PIU SAERVIRE IN QUANTO I PEZZI HANNO IL PUNTATORE ALLA CASELLA
+    
     public Casella getCasella(Pezzo p, Colore c){
-        /*metodo che passandogli un pezzo ritorna "la" casella dove si trova il pezzo*/
+        //metodo che passandogli un pezzo ritorna "la" casella dove si trova il pezzo
         
         for(int i = 0; i<this.width; i++){
             for (int j = 0; j< this.height; j++){
@@ -142,12 +147,12 @@ public class Scacchiera {
                 }catch (NullPointerException e){}
             }
         }
-        return new Casella (8,8);
+        //return new Casella (8,8);
 
     }
    
     public Casella getRe(Colore color){
-        /*metodo che torna la casella dove si trova i re del colore passato*/
+        //metodo che torna la casella dove si trova i re del colore passato
         
         for(int i = 0; i<this.width; i++){
             for (int j = 0; j< this.height; j++){
@@ -158,6 +163,6 @@ public class Scacchiera {
                 }catch (NullPointerException e){}
             }
         }
-        return new Casella (8,8);
-    }
+       // return new Casella (8,8); 
+    } */
 }

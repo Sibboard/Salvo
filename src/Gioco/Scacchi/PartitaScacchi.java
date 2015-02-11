@@ -2,6 +2,7 @@ package Gioco.Scacchi;
 
 import Gioco.Scacchi.Eccezioni.PattaException;
 import Gioco.*;
+import Gioco.Scacchi.*;
 //import Gioco.Turno;  non necessario??
 import Gioco.Eccezioni.*;
 import Gioco.Scacchi.Pedine.*;
@@ -25,8 +26,8 @@ public class PartitaScacchi {
     public Colore turno;
     private String enPassant;
     private String arrocco;
-    public static Set <Pezzo> PezziBianchi;
-    public static Set <Pezzo> PezziNeri;
+    public static Set <PedinaScacchi> PezziBianchi = new HashSet <>();
+    public static Set <PedinaScacchi> PezziNeri = new HashSet <>();
     private Map <String, Integer> scacco_perpetuoB = new HashMap();
     private Map <String, Integer> scacco_perpetuoN = new HashMap();
     
@@ -147,7 +148,7 @@ public class PartitaScacchi {
                     scacchiera.inserisci(tra, ind, new Re(Colore.NERO)); ind++; break;
 
                 case 'P':
-                    scacchiera.inserisci(tra, ind, new Pedone(Colore.BIANCO)); ind++; break;
+                    scacchiera.inserisci(tra, ind, new Pedone(Colore.BIANCO));  ind++; break;
                 case 'p':
                     scacchiera.inserisci(tra, ind, new Pedone(Colore.NERO)); ind++; break;
                                    
@@ -295,8 +296,8 @@ public class PartitaScacchi {
         MossaIllegaleException, PattaException, TurnoErratoException, ReSottoScaccoException /* ScaccoMattoException*/{
         /* muovi(da,a) deve controllare la legalità della mossa (turno, pezzo, 
         caselle) e in caso deve sollevare le giuste eccezioni */
-        Pezzo pezzo_da;
-        Pezzo pezzo_a;
+        PedinaScacchi pezzo_da;
+        PedinaScacchi pezzo_a;
         String partita = this.Partita; 
         
         
@@ -310,7 +311,8 @@ public class PartitaScacchi {
         
         //--------------patta check
         // ripetizione di posizione
-        
+        // fare un metodo checkPatta() throws PattaExceptionche fa i controli della patta
+        //bisogna aggiungere 50 mosse
         try{
             ripetizionePosizione();
             materialeInsufficiente();
@@ -379,20 +381,39 @@ public class PartitaScacchi {
         
         history.push(mossa);
         System.out.print(history);
+        System.out.println(PezziBianchi);
+        if (this.sottoScacco(turno)) throw new ReSottoScaccoException();
+        
+        
         if (turno == Colore.NERO) turno = Colore.BIANCO;
         else turno = Colore.NERO;
         
-        if (this.sottoScacco(turno)) throw new ReSottoScaccoException();
+        //
+        System.out.println("ASDASDASDASDSAD");
     }
     
     public boolean sottoScacco(Colore turno){
         /* metodo che ritorna true se trova che un pezzo del colore turno
-        minaccia il re... deve essere chiamata subito dopo una mossa, prima del cambio di turno*/
-        
+        minaccia il re... deve essere chiamata ALL'INIZIO della mossa*/
+            
+        Iterator bianchi = PezziBianchi.iterator();
+        Iterator neri = PezziNeri.iterator();
+        //Re re = new Re(Colore.BIANCO);  //mi chiede un colore da passargli, potrei fare un costruttore vuoto in Re...
         
         switch (turno){
-                case BIANCO:{ Casella posizione_re = scacchiera.getRe(Colore.NERO); 
-                    for(Pezzo p : PezziBianchi){
+                case BIANCO:{ 
+                    while(bianchi.hasNext()){
+                        Re Re_b = (Re) bianchi.next();  //basta che il tipo di Re_b sia PedinaScacchi per evitare il cast?
+                        if (Re_b instanceof Re){
+                            while(neri.hasNext()){
+                                PedinaScacchi pezzo = neri.next();
+                                if(neri.next().puoiMuovere())
+                            }
+                        }
+                        
+                    }
+                    Casella posizione_re = scacchiera.getRe(Colore.NERO); 
+                    for(PedinaScacchi p : PezziBianchi){
                         if(p.puoiMuovere(scacchiera.getCasella(p, turno), posizione_re, scacchiera)){
                             return true;
                         }
@@ -436,7 +457,11 @@ public class PartitaScacchi {
     
     public void materialeInsufficiente() throws PattaException{
         /*metodo che controlla se si verifica la patta per materiale insufficiente*/
-    
+        
+        
+        /*posso crearmi una struttura contenente i pezzi necessari al continuamento e 
+        fare un confronto con i set di pezzi in gioco, conme nell'esercizio sui vettori simili
+        posso usare containsAll(collection c) */
         for(int i = 0; i<scacchiera.height; i++){
             for(int j = 0; j<scacchiera.width; j++){
                 if (scacchiera.getPezzo(i,j) != null) {

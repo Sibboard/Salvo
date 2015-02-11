@@ -26,13 +26,8 @@ public class Alfiere extends PedinaScacchi implements Traiettoria{
     }
 
     @Override
-    public Colore getColore() {
-        return this.giocatore;
-    }
-    
-    @Override
     public char getNome(){
-        if(this.getColore() == Colore.BIANCO) return 'B';
+        if(this.giocatore == Colore.BIANCO) return 'B';
                 else return 'b';
     }
 

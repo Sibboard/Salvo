@@ -53,19 +53,14 @@ public class Pedone extends PedinaScacchi {
     public boolean direzioneGiocatore(int da_r, int a_r){
         /*controlla che il pedone si stia muovendo nella direzione permessa al giocatore*/
         
-        if(this.getColore() == Colore.BIANCO && da_r > a_r) return true;
-        else if(this.getColore() == Colore.NERO && da_r < a_r) return true;
+        if(this.giocatore == Colore.BIANCO && da_r > a_r) return true;
+        else if(this.giocatore == Colore.NERO && da_r < a_r) return true;
         else return false;
     }
 
     @Override
-    public Colore getColore() {
-        return this.giocatore;
-    }
-    
-    @Override
     public char getNome(){
-        if(this.getColore() == Colore.BIANCO) return 'P';
+        if(this.giocatore == Colore.BIANCO) return 'P';
                 else return 'p';
     }
 

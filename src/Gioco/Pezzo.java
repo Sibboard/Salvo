@@ -7,7 +7,7 @@ package Gioco;
  anche di altri giochi).
  */
 public interface Pezzo {
-    
+        
     public boolean puoiMuovere(Casella da, Casella a, Scacchiera s);
         /* controllare sul sito il terrzo argomento*/
         /* controlla se la mossa scelta per il pezzo è legale */
@@ -20,10 +20,13 @@ public interface Pezzo {
     public char getNome();
         /*ritorna il char che rappresenta il pezzo"*/
     
-    /*
+    
     public Casella getCasella();
-        /*mi ritorna la casella dove si trova il pezzo, metodo di servizio per le chiamate a puoi muovere */
-   
+        /*ritorna la casella dove si trova il pezzo, metodo di servizio per le chiamate a puoi muovere */
+    
+    public void setCasella();
+        /*cambia la casella doive si trova il pezzo */
+    
     @Override
     public String toString();
 }

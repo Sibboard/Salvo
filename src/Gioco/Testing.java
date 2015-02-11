@@ -12,7 +12,8 @@ public class Testing {
     
         public static void main(String[] args) throws InputErratoException, 
                 CasellaVuotaException, CasellaOccupataException,
-                MossaIllegaleException, PattaException, TurnoErratoException {
+                MossaIllegaleException, PattaException, TurnoErratoException,
+                ReSottoScaccoException {
             String print;
             /*COSTRUTTORE FEN PER NUOVA PARTITA
             PartitaScacchi p = new PartitaScacchi();
@@ -52,9 +53,12 @@ public class Testing {
             System.out.print(p1);
             //p1.muovi(a, da);
             //System.out.print(p1);
+            
+            /* mossa di pezzo inesistente 
             Casella da2 = new Casella(0,0);
             Casella a2 = new Casella(0,6);
             p1.muovi(a, a2);
+            */
             System.out.print(p1);
             /*p1.muovi(a2, da);
             System.out.print(p1);

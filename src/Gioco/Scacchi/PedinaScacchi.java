@@ -7,9 +7,10 @@ import Gioco.*;
  * @author sibbor
  la questa classe impleenta l'interfaccia Pezzo da cui riceve i metodi da implementare
  */
-public abstract class PedinaScacchi implements Pezzo {
+public class PedinaScacchi implements Pezzo {
     
-    public final Colore giocatore;
+    protected final Colore giocatore;
+    private Casella casella;   //la casella dove si trova il pezzo
     
     public PedinaScacchi (Colore giocatore){
         this.giocatore = giocatore;
@@ -23,12 +24,40 @@ public abstract class PedinaScacchi implements Pezzo {
         }catch (NullPointerException e){
             return ".";
         }
-            
     }
     
-    //public abstract boolean traiettoriaOccupata(Casella a , Casella da);
-    // metodo per la traiettoria TODO
+    @Override
+    public boolean puoiMuovere(Casella da, Casella a, Scacchiera s) {
+        return this.puoiMuovere(da,a,s);
+    }
     
+    //--------SETTER e GETTER per gli attributi del pezzo-------//
     
-    // ma è brutto fare classi astratte i pezzi che non implementano alcuni metodi?
+    @Override
+    public Colore getColore(){
+        return this.giocatore;
+    } 
+
+    @Override
+    public Casella getCasella(){
+        return this.casella;
+        
+    }
+    
+    @Override
+    public void setCasella(){
+        this.casella = null;
+    }
+    
+    //overload per quando devo spostare un pezzo e gli cambio  
+    public void setCasella(Casella in){
+        this.casella = in;
+    }
+
+    @Override
+    public char getNome() {
+        return this.getNome();
+    }
+    
+
 }
