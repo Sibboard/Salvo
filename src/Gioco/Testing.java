@@ -15,6 +15,43 @@ public class Testing {
                 MossaIllegaleException, PattaException, TurnoErratoException,
                 ReSottoScaccoException {
             String print;
+            PartitaScacchi p;
+            /*
+            Casella da;
+            Casella a1, a2, a3, a4, a5, a6;
+            Pezzo regina;
+                        
+            p = new PartitaScacchi("7P/P7/8/8/3q4/8/8/P5P1 n");
+            da = new Casella(4,3);
+            a1 = new Casella(1,0);
+            a2 = new Casella(7,6);
+            a3 = new Casella(7,0);
+            a4 = new Casella(0,7);
+            a5 = new Casella(5,5);
+            a6 = new Casella(7,7);
+            
+            Scacchiera s = p.getScacchiera();
+            System.out.print(s.toString());
+            regina = s.getPezzo(da);
+            
+                // test orizzontale
+            p.muovi(da, a1);
+            //System.out.println(p);
+            p.muovi(a1, a2);
+            //System.out.println(p);
+            p.muovi(a2, a3);
+            //System.out.println(p);
+            p.muovi(a3, a4);
+            //System.out.println(p);
+            p.muovi(a4, a3);
+            //System.out.println(p);
+            */
+            /*prova per buffer*/
+            
+            Menu mn = new Menu();
+            mn.Opener();
+            
+            
             /*COSTRUTTORE FEN PER NUOVA PARTITA
             PartitaScacchi p = new PartitaScacchi();
             System.out.println("partita creata");
@@ -40,26 +77,39 @@ public class Testing {
             p.muovi(a3, da);
             System.out.print(p);
             */
-            
-            PartitaScacchi p1 = new PartitaScacchi("1r6/1k6/8/P7/8/8/8/8 w ");
+            /*
+            PartitaScacchi p1 = new PartitaScacchi("2q5/1k6/8/P7/8/8/p7/K6R n ");
             //PartitaScacchi p1 = new PartitaScacchi("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w ");
             //Casella da3 = new Casella(0,1);
             //Casella a3 = new Casella(0,0);
             //p1.muovi(da3,a3);
             System.out.print(p1);
-            Casella da = new Casella(3,0);
-            Casella a = new Casella(2,0);
+            Casella da = new Casella(0,2);
+            Casella a = new Casella(0,6);
             p1.muovi(da, a);
             System.out.print(p1);
-            //p1.muovi(a, da);
-            //System.out.print(p1);
+            p1.muovi(new Casella(7,7), new Casella (2,7));
+            System.out.print(p1);
+            p1.muovi(new Casella(1,1), new Casella (0,1));
+            System.out.print(p1);
+            p1.muovi(new Casella(2,7), new Casella (2,1));
+            System.out.print(p1);
+            p1.muovi(new Casella(0,6), new Casella (1,6));
+            System.out.print(p1);/*
             
+            */
             /* mossa di pezzo inesistente 
             Casella da2 = new Casella(0,0);
             Casella a2 = new Casella(0,6);
             p1.muovi(a, a2);
             */
+            
+            //mossa torre mentre sottoscacco
+             /*da = new Casella(0,1);
+             a = new Casella(1,2);
+             p1.muovi(da,a);
             System.out.print(p1);
+            p1.muovi(a, new Casella(3,0));/*
             /*p1.muovi(a2, da);
             System.out.print(p1);
              */

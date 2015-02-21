@@ -6,7 +6,7 @@ import Gioco.Scacchi.*;
 import java.util.ArrayList;
 
 /**
- *
+ 
  * @author sibbor
  */
 public class Alfiere extends PedinaScacchi implements Traiettoria{

@@ -8,38 +8,40 @@ package Gioco;
  */
 public class Mossa {
     
-    Casella a;
-    Casella da;
-    private boolean pezzo_mangiato;
-    
+    private static Casella a;
+    private static Casella da;
+    private static Pezzo pezzo_mangiato;
+    private static Scacchiera scacchiera;
+    private static Colore turno;
+            
     /**
      *
      */
     public Mossa(Scacchiera s, Colore turno, Casella source, Casella dest){
-        //this.turno = turnoin; me lo passa perchè salvarlo
-        
-        try{
-            if(s.getPezzo(a).getColore() != s.getPezzo(da).getColore() && s.getPezzo(a) != null){
-                this.pezzo_mangiato = true;
-            }else this.pezzo_mangiato = false;
-        }catch (NullPointerException e){
-            
-            
-        }
-          
-        
+        new Mossa(s, turno, source, dest, null);
+    }
+    
+    public Mossa(Scacchiera s, Colore turno, Casella source, Casella dest,Pezzo pezzo){
+        this.pezzo_mangiato = pezzo;
         this.da = source;
         this.a = dest;
-        
+        this.scacchiera = s;
+        this.turno = turno; 
     }
     
+    @Override
+    public String toString(){
+        //return("(Scacchiera: "+ scacchiera.toString()+" ,  Turno: "+ turno.toString()+" ,  Mossa: "+ da + "->"+a);
+        return("(Scacchiera: .... ,  Turno: "+ turno.toString()+" ,  Mossa: "+ da + "->"+a);
+    }
     
     //------- NON SERVONO SETTER E GETTER ?!?! ora 
-    public boolean getPezzo_mangiato(){
+    public Pezzo getPezzo_mangiato(){
         return this.pezzo_mangiato;
     }
-    public void setPezzo_mangiato(boolean value){
-        this.pezzo_mangiato = value;
+    
+    public void setPezzo_mangiato(Pezzo pezzo){
+        this.pezzo_mangiato = pezzo;
     }
     
 }

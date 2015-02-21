@@ -21,22 +21,25 @@ import java.util.*;
 public class PartitaScacchi {
     
     public static Scacchiera scacchiera;
-    public Stack <Mossa> history = new Stack();
-    private String Partita;
-    public Colore turno;
+    private Stack <Mossa> history = new Stack();
+    private static String posizione;
+    public static Colore turno;
     private String enPassant;
     private String arrocco;
-    public static Set <PedinaScacchi> PezziBianchi = new HashSet <>();
-    public static Set <PedinaScacchi> PezziNeri = new HashSet <>();
+    private boolean scacco;
+    public static Set <PedinaScacchi> PezziBianchi = new HashSet<>();
+    public static Set <PedinaScacchi> PezziNeri = new HashSet<>();
+    public static Set <PedinaScacchi> MaterialeInsufficiente = new HashSet<>();
     private Map <String, Integer> scacco_perpetuoB = new HashMap();
     private Map <String, Integer> scacco_perpetuoN = new HashMap();
+    
     
    
     public PartitaScacchi() throws InputErratoException
     {
         /* costruttore senza argomenti
         chiama il costruttore con argomento la stringa in fen di una nuova partita */
-        PartitaScacchi Partita = new PartitaScacchi("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+        PartitaScacchi partita = new PartitaScacchi("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     }
     
     public PartitaScacchi(String[] an) throws InputErratoException{
@@ -96,7 +99,7 @@ public class PartitaScacchi {
         
         scacchiera = new Scacchiera(8,8);
         String[] fen_notation = fen.split(" ");
-        Partita = fen_notation[0];//inizializzo la stringa della partita con quella in input
+        posizione = fen_notation[0];//inizializzo la stringa della partita con quella in input
         //Partita[0] = fen_notation;//inizializzo la stringa della partita con quella in input
         int tra = 0; int ind = 0;
         
@@ -167,12 +170,12 @@ public class PartitaScacchi {
         // setto il turno 
         
         if ("w".equals(fen_notation[1]) || "W".equals(fen_notation[1])){
-            turno = Colore.BIANCO;
-        }else turno = Colore.NERO;
+            this.turno = Colore.BIANCO;
+        }else this.turno = Colore.NERO;
         
         if (Colore.BIANCO == turno){
         
-    }
+        }
         
         // FEN_NOTATION[2] ARROCCO    TO DO--------NONONO
         // mettere booleani in re e toprre??
@@ -186,9 +189,9 @@ public class PartitaScacchi {
         //  FEN_NOTATION[5] mosse effettuate dall'inizio della partita (d incrementare ogni volta che gioca il nero)----NONONONNO
         
         //--------- stampa della scacchiera popolata 
-        
+        /*
         System.out.println("Stampa della scacchiera popolata da PartitaScacchi");
-        System.out.println("  |A |B |C |D |E |F |G |H ");
+        System.out.println("   A -B -C -D -E -F -G -H ");
         //System.out.println("--------------------------");
         for(int i = 0; i<scacchiera.height; i++){
             System.out.print(i+1);
@@ -204,7 +207,7 @@ public class PartitaScacchi {
             System.out.println();
             
         }
-     
+        */
 
         //-------
         
@@ -213,37 +216,21 @@ public class PartitaScacchi {
 
     @Override
     public String toString()throws NullPointerException{
-        String output = "";
-        //System.out.println("Entrato in PartitaScacchi.toString, ora eseguo chiamata a scacchiera.toString");
-        //System.out.println("   |A |B |C |D |E |F |G |H ");
+        String output = "\n";
         for (int i = 0; i<scacchiera.height; i++){
-            output += i+1;    // PULIZIA DEL TO STRING
+            output += scacchiera.height - i + " |";    // PULIZIA DEL TO STRING
             for (int j = 0; j<scacchiera.width ; j++){
-                //System.out.println("DOPPIO FOR");
                 
                 try{
                     output += scacchiera.getPezzo(i,j).getNome();
                 }catch (NullPointerException e){
                     output += ".";
                 }
-                //output += " |";  // PULIZIA DEL TO STRING
-                /*if(scacchiera.getPezzo(i,j) != null){
-                    System.out.println("IF DEL TOSTRING");
-                    output += scacchiera.getPezzo(i, j).getNome();
-                }else{ 
-                    
-                }*/
+                output += " |";  // PULIZIA DEL TO STRING
             }
             output += "\n";
-        }
-        /*
-        try{
-            return scacchiera.toString();
-        }catch(NullPointerException e ){
-            return "Non sono riuscito a ritornare scacchiera.toString";
-                    
-        }
-        */
+        } 
+        output += "   A  B  C  D  E  F  G  H\nTurno: "+this.turno+"\n";
         return output;
     }
     
@@ -281,24 +268,16 @@ public class PartitaScacchi {
         return output;
         
     } // end TOSTRING
-    
-    
-    public void SetScacchiera(){
-         
-    }
-
-    public Scacchiera getScacchiera() {
-        return scacchiera;
-    }
-    
-    
+      
     public void muovi(Casella da, Casella a) throws CasellaVuotaException, CasellaOccupataException,
         MossaIllegaleException, PattaException, TurnoErratoException, ReSottoScaccoException /* ScaccoMattoException*/{
         /* muovi(da,a) deve controllare la legalità della mossa (turno, pezzo, 
         caselle) e in caso deve sollevare le giuste eccezioni */
         PedinaScacchi pezzo_da;
         PedinaScacchi pezzo_a;
-        String partita = this.Partita; 
+        String partita = this.posizione; 
+        
+        System.out.println("INIZIO MOSSA: Da "+da+" ; A "+a+"Turno:"+turno );
         
         
         
@@ -311,47 +290,61 @@ public class PartitaScacchi {
         
         //--------------patta check
         // ripetizione di posizione
-        // fare un metodo checkPatta() throws PattaExceptionche fa i controli della patta
+        // fare un metodo checkPatta() throws PattaExceptionche fa i controlli della patta
         //bisogna aggiungere 50 mosse
-        try{
-            ripetizionePosizione();
-            materialeInsufficiente();
-        }catch(PattaException e){
-            throw new PattaException();
+        
+        
+        /*  -sottoScacco()
+            -checkpatta()
+                --
+        */
+        
+        checkPatta();
+        
+        
+        if (this.sottoScacco()){
+            this.scacco = true;
+            throw new ReSottoScaccoException();
         }
         
-        
+        System.out.println("DOPO SOTTOSCACCO");
+        System.out.println(this.turno);
         try{
             pezzo_da = scacchiera.getPezzo(da);
             if (da == a){
+                System.out.println("MossaIllegale 1");
                 throw new MossaIllegaleException();
             }
             /*if (pezzo instanceof Cavallo)
                 System.out.print("''TTAPPOST");
             */
-            if(!pezzo_da.getColore().toString().equals(turno.toString())){  // verificare che FUNZIONI
+            if(!pezzo_da.getColore().toString().equals(this.turno.toString())){
+                System.out.println(pezzo_da+" " +pezzo_da.getColore().toString() + " " +this.turno.toString());
                 throw new TurnoErratoException();
             }
             //if scacco = true ->
             
             /* finora muovi ha controllato:
                -- Patta
+               -- Scacco
                -- Movimento nella stessa casella
                -- Turno (si muove un pezzo dell'altro giocatore)
                -- 
             */
             if (pezzo_da.puoiMuovere(da, a, scacchiera) == true){
                 try{
+                    System.out.println("PuoiMuovere = true");
                     if (scacchiera.getPezzo(da).getColore() == scacchiera.getPezzo(a).getColore()){
                     throw new CasellaOccupataException();
                     }   
-                }catch(NullPointerException e){
-                    // nothing to do  here
-                }
+                }catch(NullPointerException e){}
                 
                 //if pezzo_da
                 
             }else{
+                //System.out.println(this);
+                
+                System.out.println("Muovi.PuoiMuovere = FALSE");
                 throw new MossaIllegaleException();
             }
             
@@ -361,83 +354,120 @@ public class PartitaScacchi {
         
         /* arrivati a questo punto la mossa dovrebbe essere regolare e corretta e quindi deve
         essere eseguita dal programma, e salvata opportunamente in uno stack*/
-        
-        Mossa mossa = new Mossa(scacchiera,turno,da,a);
-                
         pezzo_da = scacchiera.getPezzo(da);
         pezzo_a = scacchiera.getPezzo(a);
+        Mossa mossa = new Mossa(scacchiera,turno,da,a,pezzo_a);
+                
+        
         
         if( pezzo_a != null){
-            mossa.setPezzo_mangiato(true);
+            mossa.setPezzo_mangiato(pezzo_a);
             scacchiera.elimina(a);
             //elimino il pezzo mangiato dagli insiemi di pezzi esistenti
         }
         
+        //System.out.println(pezzo_da +" in "+ pezzo_da.getCasella());
         scacchiera.sposta(a, da, pezzo_da);
-        System.out.println("inserisci terminato correttamente");
-        
+        //System.out.println("inserisci terminato correttamente");
+        //System.out.println(pezzo_da +" spostato in "+ pezzo_da.getCasella());
         
         //if (pezzo_da.getNome() == 'p' && da.rowIndex == 6 && a.rowIndex == 7 && pezzo_a == null)
         
         history.push(mossa);
-        System.out.print(history);
-        System.out.println(PezziBianchi);
-        if (this.sottoScacco(turno)) throw new ReSottoScaccoException();
+        //System.out.print(mossa);
+        //System.out.println(PezziBianchi);
         
-        
+        //if (this.sottoScacco()) throw new ReSottoScaccoException();
+        //System.out.println("DOPO SOTTOSCACCO");
+        System.out.println("FINE MOSSA: Da "+da+" ; A "+a+"Turno era :"+turno );
+        System.out.println(scacchiera);
         if (turno == Colore.NERO) turno = Colore.BIANCO;
         else turno = Colore.NERO;
+        System.out.println(scacco_perpetuoB);
+        System.out.println(this);
         
-        //
-        System.out.println("ASDASDASDASDSAD");
+        //METTERE CONTROLLI PER DODDPIO PASSO PEDONE E ARROCCO?!?
+        
     }
     
-    public boolean sottoScacco(Colore turno){
+    public void ritira(){
+        
+    }
+    
+    public boolean sottoScacco(){
         /* metodo che ritorna true se trova che un pezzo del colore turno
         minaccia il re... deve essere chiamata ALL'INIZIO della mossa*/
             
         Iterator bianchi = PezziBianchi.iterator();
         Iterator neri = PezziNeri.iterator();
-        //Re re = new Re(Colore.BIANCO);  //mi chiede un colore da passargli, potrei fare un costruttore vuoto in Re...
-        
+        //System.out.println(" entro in SOTTOSCACCO");
         switch (turno){
                 case BIANCO:{ 
+                    //System.out.print("Turno bianco ");
                     while(bianchi.hasNext()){
-                        Re Re_b = (Re) bianchi.next();  //basta che il tipo di Re_b sia PedinaScacchi per evitare il cast?
-                        if (Re_b instanceof Re){
+                        PedinaScacchi re_b = (PedinaScacchi) bianchi.next(); 
+                        if (re_b instanceof Re){
+                            //System.out.print(",ho trovato il re bianco in "+re_b.getCasella() );
                             while(neri.hasNext()){
-                                PedinaScacchi pezzo = neri.next();
-                                if(neri.next().puoiMuovere())
+                                //System.out.println("entro nel while sui neri");
+                                PedinaScacchi pezzo = (PedinaScacchi) neri.next(); 
+                                if(pezzo.puoiMuovere(pezzo.getCasella(), re_b.getCasella(), scacchiera)) {
+                                    System.out.println("PUOIMUOVERE = TRUE;  SCACCO AL RE BIANCO");
+                                    System.out.println(pezzo.toString()+ pezzo.getCasella());
+                                    return true;
+                                }
+                                //else System.out.println("puoimuovere = false,"+pezzo.toString() +" check re bianco");
                             }
-                        }
-                        
-                    }
-                    Casella posizione_re = scacchiera.getRe(Colore.NERO); 
-                    for(PedinaScacchi p : PezziBianchi){
-                        if(p.puoiMuovere(scacchiera.getCasella(p, turno), posizione_re, scacchiera)){
-                            return true;
-                        }
+                            return false;
+                        }                     
                     }
                 }
                 
-                case NERO:{Casella posizione_re = scacchiera.getRe(Colore.BIANCO); 
-                    for(Pezzo p : PezziNeri){
-                        if(p.puoiMuovere(scacchiera.getCasella(p, turno), posizione_re, scacchiera)){
-                            return true;
+                case NERO:{
+                    while(neri.hasNext()){
+                        PedinaScacchi re_n = (PedinaScacchi) neri.next(); 
+                        if (re_n instanceof Re){
+                            //System.out.println(",ho trovato il re nero in "+re_n.getCasella() );
+                            while(bianchi.hasNext()){
+                                PedinaScacchi pezzo = (PedinaScacchi) bianchi.next();
+                                if(pezzo.puoiMuovere(pezzo.getCasella(), re_n.getCasella(), scacchiera)){
+                                    System.out.println("PUOIMUOVERE = TRUE; SCACCO AL RE NERO");
+                                    System.out.println(pezzo.toString()+ pezzo.getCasella());
+                                    return true;
+                                }
+                                //else System.out.println("puoimuovere = false "+pezzo.toString()+" check re nero");
+                            }
+                            return false;
                         }
+                        
                     }
                 }
+                default: return false;
         }  
-        return false;
+    }
+    
+    public void checkPatta()throws PattaException{
+        try{//ripetizionePosizione();
+            materialeInsufficiente();
+            stallo();
+        }catch(PattaException e){
+            throw new PattaException();
+        }
+    }
+    
+    public void stallo() throws PattaException{
+        
     }
     
     public void ripetizionePosizione() throws PattaException{
         /*metodo che controlla se si verifica la ripetizione di posizione*/
     
-        String partita = this.Partita;
+        String partita = this.posizione;
         if (turno == Colore.BIANCO ){ 
             if(scacco_perpetuoB.containsKey(partita)){
-                if(scacco_perpetuoB.get(partita) == 3 ){ throw new PattaException();
+                if(scacco_perpetuoB.get(partita) == 3 ){ 
+                    System.out.println("pattaException perpetuo B");
+                    throw new PattaException();
                 }else{
                     int temp = scacco_perpetuoB.get(partita) + 1;
                     scacco_perpetuoB.put(partita, temp);
@@ -445,16 +475,17 @@ public class PartitaScacchi {
             }else{scacco_perpetuoB.put(partita, 1);}
         }else{ //turno nero
             if(scacco_perpetuoN.containsKey(partita)){
-                if(scacco_perpetuoN.get(partita) == 3 ){ throw new PattaException();
+                if(scacco_perpetuoN.get(partita) == 3 ){
+                    System.out.println("pattaException perpetuo n");
+                    throw new PattaException();
                 }else{
                     int temp = scacco_perpetuoN.get(partita) + 1;
                     scacco_perpetuoN.put(partita, temp);
                 }
             }else{scacco_perpetuoN.put(partita, 1);}
-        }
+        } 
     }
-    
-    
+        
     public void materialeInsufficiente() throws PattaException{
         /*metodo che controlla se si verifica la patta per materiale insufficiente*/
         
@@ -462,6 +493,46 @@ public class PartitaScacchi {
         /*posso crearmi una struttura contenente i pezzi necessari al continuamento e 
         fare un confronto con i set di pezzi in gioco, conme nell'esercizio sui vettori simili
         posso usare containsAll(collection c) */
+        Iterator bianchi = PezziBianchi.iterator();
+        Iterator neri = PezziNeri.iterator();
+                
+        /*      
+        switch (turno){
+                case BIANCO:{ 
+                    if (PezziBianchi.size() >= 3) throw new PattaException();
+                    while(bianchi.hasNext()){
+                        Re Re_b = (Re) bianchi.next(); 
+                        if (Re_b instanceof Re){
+                            while(neri.hasNext()){
+                                PedinaScacchi pezzo = (PedinaScacchi) neri.next();
+                                if(pezzo.puoiMuovere(pezzo.getCasella(), Re_b.getCasella(), scacchiera))
+                                   
+                            }
+                            ;
+                        }                     
+                    }
+                }
+                
+                case NERO:{
+                    while(neri.hasNext()){
+                        Re Re_n = (Re) neri.next(); 
+                        if (Re_n instanceof Re){
+                            while(bianchi.hasNext()){
+                                PedinaScacchi pezzo = (PedinaScacchi) bianchi.next();
+                                if(pezzo.puoiMuovere(pezzo.getCasella(), Re_n.getCasella(), scacchiera))
+                                   
+                            }
+                            
+                        }
+                        
+                    }
+                }
+        }  
+        
+        
+        */
+        
+        
         for(int i = 0; i<scacchiera.height; i++){
             for(int j = 0; j<scacchiera.width; j++){
                 if (scacchiera.getPezzo(i,j) != null) {
@@ -470,8 +541,8 @@ public class PartitaScacchi {
             }
         }        
     }
-
-   
+    
+    
     public void setPassant(Casella c){
         
     }
@@ -479,6 +550,13 @@ public class PartitaScacchi {
     public void pezzoRemove(Pezzo p, Set <Pezzo> P){
         /*rimuove i pezzi dai set dei pezzi in gioco*/
         P.remove(p);
+    }
+       
+    public void SetScacchiera(){
+         
+    }
+    public Scacchiera getScacchiera() {
+        return scacchiera;
     }
     /*
     public void abbandona(){
@@ -489,6 +567,8 @@ public class PartitaScacchi {
     /*metodo che permette l'annullamento di una mossa
     sfruttare questo metodo per controllare lo scaccoal re*/
     //}
+    
+    
            
     
 }

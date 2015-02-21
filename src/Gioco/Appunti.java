@@ -55,15 +55,24 @@ public class Appunti {
     -mettere turno dopo la scacchirea nella sampa
     -scacchiera.getCasella() controllare la condizione
     --controllare il fatto che il re puo muovere e mettersi sotto scacco quindi bisogna annullarne la mossa
+        se implementoil ritira, poi posso 
     --i pezzi vanno aggiunti nei set() nel momento in cui vengono creati Pezzineri PezziBaicnhi
     
     ---IN MOSSA METTERE CHE È SOTTOSCACCO;
-    --CONTROLLO LA PATTA STRANA CON PEZZI CHE NON POSSONO MUOVERE, NEANCHE IL RE, CHE LO METTEREBBERO SOTTOSCACCO;
-    --scacco iteratore su pezzi
+   
+    --re che si mette sotto scacco da solo, re che si toglie dallo scacco (sottoScacco viene chiamato prima della mossa quindi
+        se la mossa sarebbe stata che il re si toglieva dallo scacco viene sollevata comunque RESOTTOSCACCO
+    
+    
+    
     
     ----commit
-    -aggiunti 2 set con i pezzi in gioco per ogni giocatore
-    -togliere enum turno, lasciando giocatore, e mettere una variabile (globale)? per tenere il turno
+    -aggiunti 2 hashMap con i pezzi in gioco per ogni giocatore
+    -togliere enum turno, lasciando giocatore, e mettere una variabile statica per tenere il turno
+    --controllato doppio passo pedone
+     --scacco iteratore su pezzi
+    
+    
     
     ---OGGI
     --modificare materiale insufficiente: aggiunta parametro turno, cerca negli hashSet le pedine e controlla 

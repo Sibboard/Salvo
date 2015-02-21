@@ -6,6 +6,7 @@ import Gioco.Pezzo;
 import Gioco.Scacchi.Eccezioni.PattaException;
 import Gioco.Scacchi.PartitaScacchi;
 import Gioco.Scacchiera;
+import test.junit;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,5 +55,4 @@ public class ReginaTest {
     }
 
 }
-
 */

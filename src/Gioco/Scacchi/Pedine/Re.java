@@ -21,10 +21,12 @@ public class Re extends PedinaScacchi {
         int si, sj, di, dj; // s = source  d = destination
         si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
         System.out.println("entrato in puoimuovere___RE");
-        if(primamossa){
+        
+        //devo controllare che il re non si metta sotto scacco da solo 
+        //______________________________________
             if (Math.abs(si-di)<= 1 && Math.abs(sj-dj) <= 1)
                 return true;
-        }
+        
         return false;
     }
 

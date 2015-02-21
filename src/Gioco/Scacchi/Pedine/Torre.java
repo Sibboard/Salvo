@@ -34,16 +34,18 @@ public class Torre extends PedinaScacchi implements Traiettoria {
     public boolean traiettoriaDritta(Casella da, Casella a, Scacchiera s) {
         int si, sj, di, dj; // s = source  d = destination
         si = da.rowIndex; sj = da.columnIndex; di = a.rowIndex; dj = a.columnIndex;
-
+        System.out.println("Traietoria dritta TORRE");    
         int srcAsse = (si == di) ? sj : si;
         int destAsse = (sj == dj) ? di : dj;
         int destAsseMovimento = (sj == dj) ? dj : di;
-
+        
+        System.out.println(srcAsse+", "+destAsse+", "+destAsseMovimento);
         int max = Math.max(srcAsse, destAsse);
         int min = Math.min(srcAsse, destAsse);
+        System.out.println("Max= "+max+" MIN= "+min);
 
         for(int i = min + 1; i < max; i++) {
-            if((srcAsse == si && s.getPezzo(destAsseMovimento, i) != null) || (srcAsse == sj && s.getPezzo(i,destAsseMovimento) != null)) {
+            if((srcAsse == sj && s.getPezzo(destAsseMovimento, i) != null) || (srcAsse == si && s.getPezzo(i,destAsseMovimento) != null)) {
                return false;
             }
         }

@@ -54,12 +54,14 @@ public class Scacchiera {
         //devo controllare se posos aggiungere
         //controllare se sbrocca se gli passo NULL come Pezzo da mettere in scacchiera
         scacchiera[traversa][indice] = p;
-        p.setCasella(new Casella(traversa, indice));
+        
         
         try{
             if (p.getColore() == Colore.BIANCO) 
                  Gioco.Scacchi.PartitaScacchi.PezziBianchi.add(p);
             else  Gioco.Scacchi.PartitaScacchi.PezziNeri.add(p);
+            p.setCasella(new Casella(traversa, indice));
+
         }catch(NullPointerException e){
             
         }
@@ -85,7 +87,7 @@ public class Scacchiera {
         
         scacchiera[a.rowIndex][a.columnIndex] = p;
         scacchiera[da.rowIndex][da.columnIndex] = null;
-        p.setCasella(new Casella(da.rowIndex, da.columnIndex));
+        p.setCasella(new Casella(a.rowIndex, a .columnIndex));
     }
 
         
@@ -95,29 +97,14 @@ public class Scacchiera {
 
         for(int i = 0; i < this.height; i++){
             for(int j = 0; j < this.width; j++){
-                //System.out.println("entrato  nel doppio ciclo in scacchiera.toString");
-                //if(scacchiera[i][j] == null) output += ".";
-                //else output += scacchiera[i][j].getNome();
-                //output += scacchiera[i][j].getNome();
-                //System.out.print(output);
-                 /*
-                if (this.getPezzo(i,j) != null){
-                    output += this.getPezzo(i,j);
-                }else{
-                    output += ".";
-                }
-                */
-                
                 try{
                     output += this.getPezzo(i,j).getNome();
                 }catch (NullPointerException e){
                     output += ".";
                 }
-                
             }
-            output += "\n";
+            output += "\\";
         }
-
         return output;
     }
     //GEtTraversa per stampare la scacchiera aggiungendo le lettere e i numeri (coordinate)

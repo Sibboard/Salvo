@@ -22,6 +22,11 @@ public class Casella {
         this.columnIndex = c;
     }
     
+    @Override
+    public String toString(){
+        return ("("+this.rowIndex+","+this.columnIndex+")");
+    }
+    
     //public static void inserisci(Casella c, Pezzo p){
         //TODO
     
