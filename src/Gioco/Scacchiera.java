@@ -3,21 +3,25 @@ package Gioco;
 import Gioco.Scacchi.*;
 import Gioco.Scacchi.Pedine.*;
 
+import java.util.*;
+
 /**
  * *** @author sibbor
  la classe Scacchiera definisce il campo di gioco: una matrice di oggetti Pezzo, con misure variabili
  */
 public class Scacchiera {
     
-    private Pezzo[][] scacchiera; /*provare FINAL */
+    public Pezzo[][] scacchiera; /*provare FINAL */
     public int width, height;
+    public Set <Pezzo> PezziBianchi;
+    public Set <Pezzo> PezziNeri;
     
     
     
     public Scacchiera(int h, int w){
         /*costruttore che inizializza una matrice height*width di oggetti Pezzo e memorizza le sue dimensioni */
         
-        scacchiera = new Pezzo[h][w];
+        this.scacchiera = new Pezzo[h][w];
         /*for(int i = 0; i< 8; i++){
             for(int j = 0; j<8; j++){
                 System.out.print(scacchiera[i][j]);
@@ -26,6 +30,9 @@ public class Scacchiera {
         }*/
         this.height = h;
         this.width = w;
+        this.PezziBianchi = new HashSet<>();
+        this.PezziNeri = new HashSet<>();
+        
     }
     
     public PedinaScacchi getPezzo(Casella c){
@@ -33,6 +40,8 @@ public class Scacchiera {
         
         return (PedinaScacchi) scacchiera[c.rowIndex][c.columnIndex];
     }
+    
+    public Integer getWidth(){ return width; } 
     
     
     public PedinaScacchi getPezzo(int traversa, int indice){
@@ -55,11 +64,14 @@ public class Scacchiera {
         //controllare se sbrocca se gli passo NULL come Pezzo da mettere in scacchiera
         scacchiera[traversa][indice] = p;
         
+        //private final Set <PedinaScacchi> PB = new HashSet<>();
+        //Gioco.Scacchi.PartitaScacchi.PezziBianchi;
+                
         
         try{
             if (p.getColore() == Colore.BIANCO) 
-                 Gioco.Scacchi.PartitaScacchi.PezziBianchi.add(p);
-            else  Gioco.Scacchi.PartitaScacchi.PezziNeri.add(p);
+                 this.PezziBianchi.add(p);
+            else  this.PezziNeri.add(p);
             p.setCasella(new Casella(traversa, indice));
 
         }catch(NullPointerException e){
@@ -75,8 +87,8 @@ public class Scacchiera {
         this.inserisci(c.rowIndex, c.columnIndex, null);
         
         if (temp.getColore() == Colore.BIANCO) 
-             Gioco.Scacchi.PartitaScacchi.PezziBianchi.remove(temp);
-        else Gioco.Scacchi.PartitaScacchi.PezziNeri.remove(temp);
+             this.PezziBianchi.remove(temp);
+        else this.PezziNeri.remove(temp);
         temp.setCasella();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         

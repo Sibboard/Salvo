@@ -1,4 +1,4 @@
-package Gioco;
+ package Gioco;
 
 import Gioco.Eccezioni.*;
 import Gioco.Scacchi.*;

@@ -25,10 +25,9 @@ public class Appunti {
     
     
     -- SET GET SCACCHIOERA???
+ 
     
-    --set\get primamossa pedone,re,torre
-    
-    -- in muovi alla fine controlla: scacco\ pedone promozione1\....ù
+    -- in muovi alla fine controlla: scacco\ pedone promozione\....ù
     
     
     ---RE
@@ -63,8 +62,13 @@ public class Appunti {
     --re che si mette sotto scacco da solo, re che si toglie dallo scacco (sottoScacco viene chiamato prima della mossa quindi
         se la mossa sarebbe stata che il re si toglieva dallo scacco viene sollevata comunque RESOTTOSCACCO
     
+   OGGGI
+    ---mettere i lcontrollo della promozione nella scacchiera: nello sposta metto controllo per instance of pedone e 1a/ultima riga
+    ---in movimento pedone metto la chiamata per il passant
+    --inmovimento re metto la chiamata per arrocco
+    (le due precedenti chiamano un metodo fdi modifica FEN)
     
-    
+    ---creare un attributo static 
     
     ----commit
     -aggiunti 2 hashMap con i pezzi in gioco per ogni giocatore

@@ -1,32 +1,37 @@
 package Gioco;
+import Gioco.Scacchi.*;
 
 /**
- * questa classe serve a definire oggetti di tipo mossa c he sarranno memorizzati in una stack
+ * questa classe serve a definire oggetti di tipo mossa che saranno memorizzati in una stack
  * per essere usati dal metodo ritira per vberificare lo scacco, ecc ecc
  *
  * @author sibbor
  */
 public class Mossa {
     
-    private static Casella a;
-    private static Casella da;
-    private static Pezzo pezzo_mangiato;
-    private static Scacchiera scacchiera;
-    private static Colore turno;
+    private PartitaScacchi partita;
+    private Casella a;
+    private Casella da;
+    private Pezzo pezzo;
+    private Pezzo pezzo_mangiato;
+    private Scacchiera scacchiera;
+    private Colore turno;
             
     /**
      *
      */
-    public Mossa(Scacchiera s, Colore turno, Casella source, Casella dest){
-        new Mossa(s, turno, source, dest, null);
+    public Mossa(PartitaScacchi p, Colore turno, Casella source, Casella dest){
+        new Mossa(p, turno, source, dest, null);
     }
     
-    public Mossa(Scacchiera s, Colore turno, Casella source, Casella dest,Pezzo pezzo){
+    public Mossa(PartitaScacchi p, Colore turno, Casella source, Casella dest, Pezzo pezzo){
         this.pezzo_mangiato = pezzo;
         this.da = source;
         this.a = dest;
-        this.scacchiera = s;
-        this.turno = turno; 
+        this.scacchiera = p.scacchiera;
+        this.turno = turno;
+        this.pezzo = scacchiera.getPezzo(da);
+        this.partita = p;
     }
     
     @Override
@@ -36,12 +41,37 @@ public class Mossa {
     }
     
     //------- NON SERVONO SETTER E GETTER ?!?! ora 
-    public Pezzo getPezzo_mangiato(){
-        return this.pezzo_mangiato;
+    
+    public PartitaScacchi getPartitaScacchi(){
+        return this.partita;
+    }
+    
+    public Scacchiera getScacchiera(){
+        return this.scacchiera;
+    }
+    
+    public PedinaScacchi getPezzo(){
+        return (PedinaScacchi)this.pezzo;
+    }
+    public PedinaScacchi getPezzo_mangiato(){
+        return (PedinaScacchi)this.pezzo_mangiato;
     }
     
     public void setPezzo_mangiato(Pezzo pezzo){
         this.pezzo_mangiato = pezzo;
     }
     
+    public Casella getCasellaA(){
+        return this.a;
+    }
+    
+    public Casella getCasellaDa(){
+        return this.da;
+    }
+    
+    public Colore getTurno(){
+        return this.turno;
+    }
+    
+   
 }

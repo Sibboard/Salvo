@@ -38,12 +38,16 @@ public class Menu {
         if (input.charAt(0)=='N' || input.charAt(0) =='n')
             p = new PartitaScacchi();
         else p = new PartitaScacchi("r7/8/8/8/8/8/PPPPPPPP/3Q1B2 w");
-        
+        System.out.println("creata partita in menu");
         System.out.println(p);
         //input = s.next();
         while(!input.equals("quit")){
             //System.out.println(p);          
             input = s.nextLine().toUpperCase();
+            if (input.equals("R")){
+                p.ritira();
+                continue;
+            }
             System.out.println("sasdfa" + input);
             while(true){
                 try{
@@ -57,7 +61,7 @@ public class Menu {
                 }
                 
             }
-            System.out.println(Arrays.toString(mossa));
+            System.out.println(Arrays.toString(mossa) + "WWWWW");
             try{
                 p.muovi(new Casella(mossa[1],mossa[0]), new Casella(mossa[3], mossa[2]));
                 
@@ -67,7 +71,11 @@ public class Menu {
                 System.out.println("Il Turno è del "+p.turno+", ritirare!");                
             }catch(MossaIllegaleException e){
                 System.out.println("Mossa non valida, ritirare!");
-            }
+            }/* catch(NullPointerException e){
+                System.out.println("Inserire la mossa nel formato A2-A3 o a2 a3 NULLPOINTER 22");
+
+                
+            }*/
 
             
 
